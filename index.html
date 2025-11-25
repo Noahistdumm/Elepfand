@@ -10,7 +10,6 @@
   <style>
     :root{--ele-blue:#3B82F6;--ele-green:#16A34A;--ele-dark:#0F172A}
     body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    /* small helper for animated confetti-ish dots */
     .confetti{position:absolute;pointer-events:none;width:8px;height:8px;border-radius:999px;opacity:0.9}
   </style>
 </head>
@@ -71,7 +70,6 @@
           <img src="elepfand.PNG" alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
           <p class="mt-4 text-sm text-gray-500">App-Mockup & Gamification</p>
         </div>
-        <!-- confetti container -->
         <div id="confetti" class="absolute inset-0 pointer-events-none"></div>
       </div>
     </div>
@@ -103,8 +101,8 @@
             <h3 class="font-semibold">Belohnungen</h3>
             <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
               <li>50 Punkte – Gratis Getränk</li>
-              <li>100 Punkte – Elepfand Thermobecher</li>
-              <li>250 Punkte – Monatsabo ohne Pfandgebühren</li>
+              <li>700 Punkte – Elepfand Thermobecher</li>
+              <li>2500 Punkte – Elepfand+ Mitgliedschaft</li>
             </ul>
           </div>
         </div>
@@ -123,9 +121,7 @@
 
         <div class="mt-6">
           <h4 class="font-semibold">Badges</h4>
-          <div id="badges" class="mt-3 flex gap-3 flex-wrap">
-            <!-- badges injected here -->
-          </div>
+          <div id="badges" class="mt-3 flex gap-3 flex-wrap"></div>
         </div>
 
         <div class="mt-6">
@@ -169,20 +165,20 @@
     <div class="mt-6 grid md:grid-cols-3 gap-6">
       <div class="bg-white p-4 rounded-xl shadow-sm">
         <h4 class="font-semibold">Gratis Getränk</h4>
-        <p class="text-sm text-gray-600">Kosten: 100 Punkte</p>
+        <p class="text-sm text-gray-600">Kosten: 50 Punkte</p>
         <button data-cost="50" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
       </div>
 
       <div class="bg-white p-4 rounded-xl shadow-sm">
         <h4 class="font-semibold">Elepfand Thermobecher</h4>
         <p class="text-sm text-gray-600">Kosten: 700 Punkte</p>
-        <button data-cost="100" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+        <button data-cost="700" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
       </div>
 
       <div class="bg-white p-4 rounded-xl shadow-sm">
-        <h4 class="font-semibold"></h4>
-        <p class="text-sm text-gray-600">Kosten: 250 Punkte</p>
-        <button data-cost="250" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+        <h4 class="font-semibold">Elepfand+ Mitgliedschaft</h4>
+        <p class="text-sm text-gray-600">Kosten: 2500 Punkte</p>
+        <button data-cost="2500" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
       </div>
     </div>
 
@@ -273,9 +269,8 @@
     <div class="border-t border-gray-100 py-4 text-sm text-center text-gray-500">© 2025 Elepfand — Built with ♻️ & Charme</div>
   </footer>
 
-  <!-- SCRIPTS: lokale Demo-Logik (localStorage) -->
+  <!-- SCRIPT: STATE + POINTS + CHALLENGES + SHOP -->
   <script>
-    // --- initial demo state ---
     const DEFAULT = {
       name: 'Thomas',
       points: 34,
@@ -286,134 +281,123 @@
 
     function loadState(){
       const raw = localStorage.getItem('elepfand_demo');
-      if(!raw) { localStorage.setItem('elepfand_demo', JSON.stringify(DEFAULT)); return {...DEFAULT}; }
+      if(!raw){ localStorage.setItem('elepfand_demo', JSON.stringify(DEFAULT)); return {...DEFAULT}; }
       try { return JSON.parse(raw); } catch(e){ localStorage.setItem('elepfand_demo', JSON.stringify(DEFAULT)); return {...DEFAULT}; }
     }
+
     function saveState(state){ localStorage.setItem('elepfand_demo', JSON.stringify(state)); renderAll(state); }
 
     let state = loadState();
 
-    // --- render ---
+    function addBadgeIfNeeded(name){
+      if(!state.badges.includes(name)){ state.badges.push(name); saveState(state); }
+    }
+
     function renderAll(s){
       document.getElementById('profileName').textContent = s.name;
       document.getElementById('miniPointsCount').textContent = s.points;
       document.getElementById('pointCount').textContent = s.points;
-      document.getElementById('avatar').textContent = s.name ? s.name.charAt(0).toUpperCase() : 'U';
+      document.getElementById('avatar').textContent = s.name.charAt(0).toUpperCase();
+
+      // Level + Badge
+      if(s.points >= 2500){ s.level='Elepfand+'; addBadgeIfNeeded('Elepfand+'); }
+      else if(s.points >= 700){ s.level='Gold'; addBadgeIfNeeded('Thermobecher'); }
+      else if(s.points >= 250){ s.level='Silber'; }
+
       document.getElementById('profileLevel').textContent = s.level;
 
-      // progress bar towards next milestone (50)
-      const next = 50;
-      const pct = Math.min(100, Math.round((s.points / next) * 100));
-      document.getElementById('progressBar').style.width = pct + '%';
+      // Badges Render
+      const badgesBox = document.getElementById('badges');
+      badgesBox.innerHTML = '';
+      s.badges.forEach(b=>{ const el = document.createElement('div'); el.textContent=b; el.className='px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs'; badgesBox.appendChild(el); });
+
+      // Progress & nextReward
+      let next = s.points<50?50:s.points<700?700:2500;
+      document.getElementById('progressBar').style.width = Math.min(100,(s.points/next)*100)+'%';
       document.getElementById('nextRewardText').textContent = `${s.points}/${next} Punkten bis zur nächsten Belohnung`;
 
-      // badges
-      const badgesWrap = document.getElementById('badges'); badgesWrap.innerHTML = '';
-      s.badges.forEach(b=>{ const el = document.createElement('div'); el.className='px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-50 border rounded-full text-sm'; el.textContent = b; badgesWrap.appendChild(el); });
-
-      // challenges
-      renderChallenges(s);
-
-      // uploads
-      const up = document.getElementById('uploadPreview'); up.innerHTML = '';
-      s.uploads.forEach((u, i)=>{
-        const img = document.createElement('img'); img.src = u; img.className = 'w-full h-24 object-cover rounded-md'; img.alt = 'Upload '+(i+1);
-        up.appendChild(img);
-      });
-
-      // cart
-      const cart = JSON.parse(localStorage.getItem('elepfand_cart')||'[]');
-      const cartEl = document.getElementById('cart'); cartEl.textContent = cart.length ? cart.map(c=>c.name+' ('+c.cost+' P)').join(', ') : '— leer —';
-
-      // bot message quick update
-      const bot = document.getElementById('botMessages'); bot.innerHTML = `Hey ${s.name || 'da'}, du hast <strong>${s.points}</strong> Punkte — noch <strong>${Math.max(0,50-s.points)}</strong> bis zur Gratis-Getränk Belohnung!`;
-
-      // mini stats random-ish demo
-      document.getElementById('statMembers').textContent = '4392';
-    }
-
-    // --- simple challenge engine ---
-    const challenges = [
-      {id:'c1',title:'Wöchentliche Rückgabe: 5 Becher', points:20,active:true},
-      {id:'c2',title:'Bring einen Freund mit', points:15,active:true},
-      {id:'c3',title:'Zero-Waste-Tag', points:10,active:false}
-    ];
-
-    function renderChallenges(s){
-      const el = document.getElementById('chList'); el.innerHTML='';
-      challenges.forEach(c=>{
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${c.title}</strong> — ${c.points} P ${c.active?'<span class="text-green-600">(aktiv)</span>':'(inaktiv)'}`;
-        if(c.active){ const btn = document.createElement('button'); btn.className='ml-3 px-2 py-1 text-xs border rounded'; btn.textContent='Abschließen'; btn.onclick = ()=>{ addPoints(c.points); addBadgeIfNeeded('Challenge Hero'); alert('Challenge abgeschlossen! +' + c.points + ' P'); }; li.appendChild(btn); }
-        el.appendChild(li);
+      // Upload preview
+      const upDiv = document.getElementById('uploadPreview');
+      upDiv.innerHTML='';
+      s.uploads.forEach(f=>{
+        const img = document.createElement('img');
+        img.src = f;
+        img.className='w-full h-20 object-cover rounded-md';
+        upDiv.appendChild(img);
       });
     }
 
-    // --- points / actions ---
-    function addPoints(n){ state.points += n; // level ups
-      if(state.points >= 250 && !state.badges.includes('Platinum')) state.badges.push('Platinum');
-      if(state.points >= 100 && !state.badges.includes('100+')) state.badges.push('100+');
-      if(state.points >= 50 && !state.badges.includes('50+')) state.badges.push('50+');
-      // level assign
-      if(state.points >= 250) state.level = 'Gold'; else if(state.points >=100) state.level = 'Silber'; else state.level = 'Bronze';
-      saveState(state);
-      fireConfetti();
-    }
-
-    function addBadgeIfNeeded(name){ if(!state.badges.includes(name)){ state.badges.push(name); saveState(state); } }
-
-    // simulate container drop
-    document.getElementById('simulateDrop').addEventListener('click', ()=>{ addPoints(5); alert('Becher zurückgegeben → +5 P (Demo)'); });
-    document.getElementById('addTen').addEventListener('click', ()=>{ addPoints(10); });
-
-    // --- uploads handling ---
-    const uploadForm = document.getElementById('uploadForm');
-    uploadForm.addEventListener('submit', (e)=>{
-      e.preventDefault(); const file = document.getElementById('photoInput').files[0];
-      if(!file){ alert('Bitte ein Foto auswählen'); return; }
-      const reader = new FileReader(); reader.onload = ()=>{ state.uploads.push(reader.result); addPoints(8); saveState(state); alert('Upload gespeichert — +8 P (Demo)'); }; reader.readAsDataURL(file);
-    });
-    document.getElementById('clearUploads').addEventListener('click', ()=>{ state.uploads = []; saveState(state); });
-
-    // --- rewards shop ---
-    document.querySelectorAll('.buyBtn').forEach(b=> b.addEventListener('click', (ev)=>{
-      const cost = parseInt(ev.currentTarget.dataset.cost,10);
-      if(state.points >= cost){ state.points -= cost; // add to cart
-        const cart = JSON.parse(localStorage.getItem('elepfand_cart')||'[]');
-        cart.push({name: ev.currentTarget.parentElement.querySelector('h4').textContent, cost});
-        localStorage.setItem('elepfand_cart', JSON.stringify(cart)); saveState(state); alert('Belohnung eingelöst! (Demo)');
-      } else { alert('Nicht genug Punkte.'); }
-    }));
-
-    // --- cart persistence show ---
-
-    // reset demo
-    document.getElementById('resetBtn').addEventListener('click', ()=>{ if(confirm('Demo-Daten zurücksetzen?')){ localStorage.removeItem('elepfand_demo'); localStorage.removeItem('elepfand_cart'); state = loadState(); renderAll(state); } });
-
-    // --- simple bot ---
-    document.getElementById('botForm').addEventListener('submit', (e)=>{
-      e.preventDefault(); const q = document.getElementById('botInput').value.trim(); if(!q) return;
-      const out = document.getElementById('botMessages');
-      const reply = botReply(q); out.innerHTML += `<div class="mt-2"><strong>Du:</strong> ${escapeHtml(q)}</div><div class="mt-1 text-sm text-gray-600"><strong>Bot:</strong> ${escapeHtml(reply)}</div>`;
-      out.scrollTop = out.scrollHeight; document.getElementById('botInput').value='';
-    });
-
-    function botReply(q){ q = q.toLowerCase(); if(q.includes('punkte')) return `Du hast ${state.points} Punkte — noch ${Math.max(0,50-state.points)} bis zur nächsten Belohnung.`; if(q.includes('belohn')) return 'Siehe Rewards im Shop — Gratis Getränk bei 50 Punkten!'; if(q.includes('challenge')) return 'Schau bei Challenges: Du kannst sofort Punkte mit aktiven Challenges verdienen.'; return 'Cool! Versuch: "Wie viele Punkte hab ich?" oder "Welche Belohnungen gibt es?"'; }
-
-    function escapeHtml(s){ return s.replace(/[&<>\"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-
-    // --- confetti ---
-    function fireConfetti(){ const wrap = document.getElementById('confetti'); for(let i=0;i<18;i++){ const d=document.createElement('div'); d.className='confetti'; d.style.left = Math.random()*90 + '%'; d.style.top = Math.random()*-10 + '%'; d.style.background = `hsl(${Math.random()*360} 80% 60%)`; wrap.appendChild(d); animateConf(d); setTimeout(()=>d.remove(),1500); } }
-    function animateConf(el){ el.animate([{transform:'translateY(0) rotate(0) scale(1)'},{transform:`translateY(${120+Math.random()*120}px) rotate(${Math.random()*720}deg) scale(.9)`}],{duration:1200+Math.random()*400, easing:'cubic-bezier(.2,.7,.2,1)'}); }
-
-    // initial render
     renderAll(state);
 
-    // small UX nicety: update cart display when DOM ready
-    document.addEventListener('DOMContentLoaded', ()=>{ const cart = JSON.parse(localStorage.getItem('elepfand_cart')||'[]'); if(cart.length){ document.getElementById('cart').textContent = cart.map(c=>c.name+' ('+c.cost+' P)').join(', '); } });
+    // Buttons
+    document.getElementById('simulateDrop').onclick=()=>{
+      state.points +=5;
+      saveState(state);
+    }
+    document.getElementById('addTen').onclick=()=>{
+      state.points +=10;
+      saveState(state);
+    }
 
+    document.getElementById('resetBtn').onclick=()=>{
+      if(confirm('Demo zurücksetzen?')){
+        state={...DEFAULT};
+        saveState(state);
+      }
+    }
+
+    // Uploads
+    document.getElementById('uploadForm').onsubmit = e=>{
+      e.preventDefault();
+      const file = document.getElementById('photoInput').files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = evt=>{
+          state.uploads.push(evt.target.result);
+          state.points +=20;
+          saveState(state);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+    document.getElementById('clearUploads').onclick=()=>{
+      state.uploads=[];
+      saveState(state);
+    }
+
+    // Shop
+    document.querySelectorAll('.buyBtn').forEach(btn=>{
+      btn.onclick=()=>{
+        const cost = parseInt(btn.dataset.cost);
+        if(state.points>=cost){
+          state.points-=cost;
+          alert(`Reward eingelöst! (${cost} Punkte)`);
+          saveState(state);
+        }else alert('Nicht genug Punkte!');
+      }
+    });
+
+    // Bot
+    document.getElementById('botForm').onsubmit=e=>{
+      e.preventDefault();
+      const msg = document.getElementById('botInput').value.trim();
+      if(!msg) return;
+      const box = document.getElementById('botMessages');
+      box.innerHTML += `<div>Du: ${msg}</div>`;
+      box.innerHTML += `<div>Bot: Cool! Du hast ${state.points} Punkte.</div>`;
+      box.scrollTop=box.scrollHeight;
+      document.getElementById('botInput').value='';
+    }
+
+    // Demo challenges
+    const challenges=['Challenge 1: 5 Becher zurückgeben','Challenge 2: 20 Punkte in 1 Tag','Challenge 3: Lade ein Bild hoch'];
+    const chList = document.getElementById('chList');
+    challenges.forEach(c=>{
+      const li=document.createElement('li'); li.textContent=c; chList.appendChild(li);
+    });
   </script>
 </body>
 </html>
+
 
 
