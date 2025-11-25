@@ -14,390 +14,301 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <!-- NAV -->
-  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#hero" class="flex items-center gap-3">
-        <img src="elepfand.PNG" alt="Elepfand Logo" class="w-12 h-12 rounded-md" onerror="this.style.display='none'">
-        <span class="font-extrabold text-xl text-slate-900">Elepfand</span>
-      </a>
-      <nav class="hidden md:flex gap-6 items-center text-sm">
-        <a href="#how" class="hover:underline">Wie's funktioniert</a>
-        <a href="#points" class="hover:underline">Punkte</a>
-        <a href="#challenges" class="hover:underline">Challenges</a>
-        <a href="#rewards" class="hover:underline">Rewards</a>
-        <a href="#map" class="hover:underline">Rückgabe</a>
-        <a href="#contact" class="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2 rounded-full text-sm shadow">Partner werden</a>
-      </nav>
-      <button class="md:hidden p-2 rounded-md" aria-label="Open menu">☰</button>
+
+<!-- LOGIN -->
+<section id="login" class="max-w-md mx-auto px-6 py-10 bg-white rounded-xl shadow-sm mt-10">
+  <h2 class="text-xl font-bold mb-4">Demo Login</h2>
+  <form id="loginForm" class="flex flex-col gap-3">
+    <input type="text" id="loginName" placeholder="Benutzername eingeben" class="px-3 py-2 border rounded-md">
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Login</button>
+  </form>
+  <p class="text-sm text-gray-500 mt-2">Demo-Benutzer: Thomas, Samuel, Neal, Aaron</p>
+</section>
+
+<!-- NAV -->
+<header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm mt-6">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-3">
+      <img src="elepfand.PNG" alt="Elepfand Logo" class="w-12 h-12 rounded-md" onerror="this.style.display='none'">
+      <span class="font-extrabold text-xl text-slate-900">Elepfand</span>
+    </a>
+    <nav class="hidden md:flex gap-6 items-center text-sm">
+      <a href="#how" class="hover:underline">Wie's funktioniert</a>
+      <a href="#points" class="hover:underline">Punkte</a>
+      <a href="#challenges" class="hover:underline">Challenges</a>
+      <a href="#rewards" class="hover:underline">Rewards</a>
+      <a href="#map" class="hover:underline">Rückgabe</a>
+      <a href="#contact" class="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2 rounded-full text-sm shadow">Partner werden</a>
+    </nav>
+    <button class="md:hidden p-2 rounded-md" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row items-center gap-10">
+  <div class="flex-1">
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Elepfand — Mehrweg & Rewards</h1>
+    <p class="mt-4 text-lg text-gray-600">Sammle Punkte, erledige Challenges, hol dir Rewards — alles in dieser Demo.</p>
+    <div class="mt-8 flex gap-3">
+      <a href="#rewards" class="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold shadow">Rewards Shop</a>
+      <a href="#challenges" class="inline-flex items-center gap-2 border border-gray-200 px-5 py-3 rounded-lg">Challenges</a>
     </div>
-  </header>
-
-  <!-- HERO -->
-  <section id="hero" class="max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row items-center gap-10">
-    <div class="flex-1">
-      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Elepfand — Mehrweg & Rewards</h1>
-      <p class="mt-4 text-lg text-gray-600">Sammle Punkte, erledige Challenges, hol dir Rewards — alles in dieser Demo.</p>
-
-      <div class="mt-8 flex gap-3">
-        <a href="#rewards" class="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold shadow">Rewards Shop</a>
-        <a href="#challenges" class="inline-flex items-center gap-2 border border-gray-200 px-5 py-3 rounded-lg">Challenges</a>
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      <div class="p-4 bg-white rounded-lg shadow-sm">
+        <div class="text-sm text-gray-500">CO₂-Ersparnis</div>
+        <div class="font-bold text-2xl">+1200kg</div>
       </div>
-
-      <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-        <div class="p-4 bg-white rounded-lg shadow-sm">
-          <div class="text-sm text-gray-500">CO₂-Ersparnis</div>
-          <div class="font-bold text-2xl">+1200kg</div>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-sm">
-          <div class="text-sm text-gray-500">Partner</div>
-          <div class="font-bold text-2xl">34+</div>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-sm">
-          <div class="text-sm text-gray-500">Umläufe / Behälter</div>
-          <div class="font-bold text-2xl">6.8</div>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-sm" id="miniPoints">
-          <div class="text-sm text-gray-500">Deine Punkte</div>
-          <div class="font-bold text-2xl" id="miniPointsCount">34</div>
-        </div>
+      <div class="p-4 bg-white rounded-lg shadow-sm">
+        <div class="text-sm text-gray-500">Partner</div>
+        <div class="font-bold text-2xl">34+</div>
       </div>
-    </div>
-
-    <div class="flex-1 flex items-center justify-center">
-      <div class="w-80 h-80 bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl flex items-center justify-center shadow-lg relative overflow-hidden">
-        <div class="text-center">
-          <img src="elepfand.PNG" alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
-          <p class="mt-4 text-sm text-gray-500">App-Mockup & Gamification</p>
-        </div>
-        <div id="confetti" class="absolute inset-0 pointer-events-none"></div>
+      <div class="p-4 bg-white rounded-lg shadow-sm">
+        <div class="text-sm text-gray-500">Umläufe / Behälter</div>
+        <div class="font-bold text-2xl">6.8</div>
+      </div>
+      <div class="p-4 bg-white rounded-lg shadow-sm" id="miniPoints">
+        <div class="text-sm text-gray-500">Deine Punkte</div>
+        <div class="font-bold text-2xl" id="miniPointsCount">34</div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="flex-1 flex items-center justify-center">
+    <div class="w-80 h-80 bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl flex items-center justify-center shadow-lg relative overflow-hidden">
+      <div class="text-center">
+        <img src="elepfand.PNG" alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
+        <p class="mt-4 text-sm text-gray-500">App-Mockup & Gamification</p>
+      </div>
+      <div id="confetti" class="absolute inset-0 pointer-events-none"></div>
+    </div>
+  </div>
+</section>
 
-  <!-- POINTS SYSTEM -->
-  <section id="points" class="max-w-7xl mx-auto px-6 py-10">
-    <div class="grid lg:grid-cols-2 gap-8">
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <h2 class="text-2xl font-bold">Punktesystem</h2>
-        <p class="mt-2 text-gray-600">Jeder zurückgegebene Becher gibt Punkte. Löse Rewards ein oder steigere dein Level.</p>
-
+<!-- POINTS SYSTEM -->
+<section id="points" class="max-w-7xl mx-auto px-6 py-10">
+  <div class="grid lg:grid-cols-2 gap-8">
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+      <h2 class="text-2xl font-bold">Punktesystem</h2>
+      <p class="mt-2 text-gray-600">Jeder zurückgegebene Becher gibt Punkte. Löse Rewards ein oder steigere dein Level.</p>
+      <div class="mt-6">
+        <div class="flex justify-between mb-2">
+          <span class="font-semibold">Deine Punkte</span>
+          <span class="font-bold text-blue-600" id="pointCount">34</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div id="progressBar" class="h-4 rounded-full" style="width: 0; background: linear-gradient(to right, var(--ele-blue), var(--ele-green));"></div>
+        </div>
+        <p class="text-sm text-gray-500 mt-2" id="nextRewardText">34/50 Punkten bis zur nächsten Belohnung</p>
+        <div class="mt-6 flex gap-3">
+          <button id="simulateDrop" class="px-4 py-2 bg-green-600 text-white rounded-lg">Becher in Container werfen (+5 P)</button>
+          <button id="addTen" class="px-4 py-2 border rounded-lg">+10 Punkte (Test)</button>
+        </div>
         <div class="mt-6">
-          <div class="flex justify-between mb-2">
-            <span class="font-semibold">Deine Punkte</span>
-            <span class="font-bold text-blue-600" id="pointCount">34</span>
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-            <div id="progressBar" class="h-4 rounded-full" style="width: 0; background: linear-gradient(to right, var(--ele-blue), var(--ele-green));"></div>
-          </div>
-          <p class="text-sm text-gray-500 mt-2" id="nextRewardText">34/50 Punkten bis zur nächsten Belohnung</p>
-
-          <div class="mt-6 flex gap-3">
-            <button id="simulateDrop" class="px-4 py-2 bg-green-600 text-white rounded-lg">Becher in Container werfen (+5 P)</button>
-            <button id="addTen" class="px-4 py-2 border rounded-lg">+10 Punkte (Test)</button>
-          </div>
-
-          <div class="mt-6">
-            <h3 class="font-semibold">Belohnungen</h3>
-            <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-              <li>50 Punkte – Gratis Getränk</li>
-              <li>700 Punkte – Elepfand Thermobecher</li>
-              <li>2500 Punkte – Elepfand+ Mitgliedschaft</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROFILE + BADGES -->
-      <div class="bg-white rounded-2xl p-6 shadow-sm">
-        <h3 class="text-xl font-semibold">Dein Profil</h3>
-        <div class="mt-4 flex items-center gap-4">
-          <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xl" id="avatar">T</div>
-          <div>
-            <div class="font-semibold" id="profileName">Thomas</div>
-            <div class="text-sm text-gray-500">Level: <span id="profileLevel">Bronze</span></div>
-          </div>
-        </div>
-
-        <div class="mt-6">
-          <h4 class="font-semibold">Badges</h4>
-          <div id="badges" class="mt-3 flex gap-3 flex-wrap"></div>
-        </div>
-
-        <div class="mt-6">
-          <button id="resetBtn" class="px-4 py-2 text-sm border rounded-md">Daten zurücksetzen (Demo)</button>
+          <h3 class="font-semibold">Belohnungen</h3>
+          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
+            <li>50 Punkte – Gratis Getränk</li>
+            <li>700 Punkte – Elepfand Thermobecher</li>
+            <li>2500 Punkte – Elepfand+</li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CHALLENGES -->
-  <section id="challenges" class="max-w-7xl mx-auto px-6 py-10">
-    <h2 class="text-2xl font-bold">Challenges</h2>
-    <p class="text-gray-600 mt-2">Tägliche und wöchentliche Challenges motivieren zu mehr Rückgaben.</p>
-
-    <div class="mt-6 grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl p-6 shadow-sm">
-        <h3 class="font-semibold">Aktuelle Challenges</h3>
-        <ul id="chList" class="mt-4 list-disc list-inside text-sm text-gray-700"></ul>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-sm">
-        <h3 class="font-semibold">Challenge einreichen</h3>
-        <p class="text-sm text-gray-600 mt-2">Lade ein Foto hoch, wenn du einen Becher zurückgegeben hast — das System gibt Punkte (Demo).</p>
-        <form id="uploadForm" class="mt-4">
-          <input id="photoInput" accept="image/*" type="file" class="block w-full text-sm text-gray-700">
-          <div class="mt-3 flex gap-3">
-            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg" type="submit">Hochladen & Punkte</button>
-            <button id="clearUploads" class="px-4 py-2 border rounded-lg" type="button">Uploads löschen</button>
-          </div>
-        </form>
-        <div id="uploadPreview" class="mt-4 grid grid-cols-3 gap-2"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REWARDS SHOP -->
-  <section id="rewards" class="max-w-7xl mx-auto px-6 py-10">
-    <h2 class="text-2xl font-bold">Rewards Shop</h2>
-    <p class="text-gray-600 mt-2">Löse deine Punkte ein — Demo: Punkte werden lokal abgezogen.</p>
-
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-4 rounded-xl shadow-sm">
-        <h4 class="font-semibold">Gratis Getränk</h4>
-        <p class="text-sm text-gray-600">Kosten: 50 Punkte</p>
-        <button data-cost="50" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
-      </div>
-
-      <div class="bg-white p-4 rounded-xl shadow-sm">
-        <h4 class="font-semibold">Elepfand Thermobecher</h4>
-        <p class="text-sm text-gray-600">Kosten: 700 Punkte</p>
-        <button data-cost="700" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
-      </div>
-
-      <div class="bg-white p-4 rounded-xl shadow-sm">
-        <h4 class="font-semibold">Elepfand+ Mitgliedschaft</h4>
-        <p class="text-sm text-gray-600">Kosten: 2500 Punkte</p>
-        <button data-cost="2500" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
-      </div>
-    </div>
-
-    <div class="mt-8 bg-white p-4 rounded-xl shadow-sm">
-      <h3 class="font-semibold">Dein Warenkorb</h3>
-      <div id="cart" class="mt-3 text-sm text-gray-700">— leer —</div>
-    </div>
-  </section>
-
-  <!-- MAP / LIVE TRACKER -->
-  <section id="map" class="max-w-7xl mx-auto px-6 py-10">
-    <h2 class="text-2xl font-bold">Rückgabestellen & Community</h2>
-    <div class="mt-4 grid lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl p-4 shadow-sm h-80">
-        <iframe class="w-full h-full rounded-lg" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2511.159267588901!2d7.628202276788213!3d51.96251097971316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9ba827b76953f%3A0xdeaaf0c12597c7c5!2sM%C3%BCnster!5e0!3m2!1sde!2sde!4v0000000000000"></iframe>
-      </div>
-
-      <div class="bg-white rounded-xl p-6 shadow-sm">
-        <h3 class="font-semibold">Community Live-Tracker</h3>
-        <p class="text-sm text-gray-600 mt-1">Echtzeit-Mockup der Community-Statistiken (Demo).</p>
-        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
-          <div>
-            <div class="text-sm text-gray-500">Mitglieder</div>
-            <div class="font-bold text-2xl" id="statMembers">4392</div>
-          </div>
-          <div>
-            <div class="text-sm text-gray-500">Ges. Rückgaben</div>
-            <div class="font-bold text-2xl" id="statReturns">12.389</div>
-          </div>
-          <div>
-            <div class="text-sm text-gray-500">CO₂ ges.</div>
-            <div class="font-bold text-2xl" id="statCO2">1.204kg</div>
-          </div>
-        </div>
-        <div class="mt-6 text-sm text-gray-500">Diese Zahlen sind für die Demo generiert — in echt würden sie vom Server kommen.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY / STORY -->
-  <section id="why" class="max-w-7xl mx-auto px-6 py-10">
-    <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-2xl font-bold">Warum Elepfand?</h2>
-      <p class="mt-3 text-gray-700">Wir reduzieren Einwegmüll, sparen CO₂ und stärken lokale Läden. Elepfand verbindet Nutzer*innen, Partner und die Umweltbelange in einer einfachen UX.</p>
-    </div>
-  </section>
-
-  <!-- CHATBOT -->
-  <div class="fixed right-6 bottom-6">
-    <div class="bg-white rounded-2xl shadow-lg w-80 p-4" id="chatbotBox">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold">🐘</div>
+    <!-- PROFILE + BADGES -->
+    <div class="bg-white rounded-2xl p-6 shadow-sm">
+      <h3 class="text-xl font-semibold">Dein Profil</h3>
+      <div class="mt-4 flex items-center gap-4">
+        <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xl" id="avatar">T</div>
         <div>
-          <div class="font-semibold">Elepfand-Bot</div>
-          <div class="text-xs text-gray-500">Dein Nachhaltigkeits-Mate</div>
+          <div class="font-semibold" id="profileName">Thomas</div>
+          <div class="text-sm text-gray-500">Level: <span id="profileLevel">Bronze</span></div>
         </div>
       </div>
-      <div class="mt-3 text-sm text-gray-700 h-28 overflow-auto" id="botMessages">Hey! Du hast 34 Punkte — noch 16 bis zur nächsten Belohnung 🎉</div>
-      <form id="botForm" class="mt-3 flex gap-2">
-        <input id="botInput" class="flex-1 px-3 py-2 border rounded-md text-sm" placeholder="Sag dem Elepfand-Bot was" />
-        <button class="px-3 py-2 bg-blue-600 text-white rounded-md">Send</button>
+
+      <div class="mt-6">
+        <h4 class="font-semibold">Badges</h4>
+        <div id="badges" class="mt-3 flex gap-3 flex-wrap"></div>
+      </div>
+
+      <div class="mt-6" id="elepfandPlusSection" style="display:none;">
+        <h4 class="font-semibold text-green-600">Elepfand+ Vorteile</h4>
+        <ul class="mt-2 text-sm text-gray-700 list-disc list-inside">
+          <li>Exklusive Events & Community-Challenges</li>
+          <li>10% Extra-Punkte auf jede Rückgabe</li>
+          <li>VIP Support</li>
+          <li>Frühzugang zu neuen Rewards</li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <button id="resetBtn" class="px-4 py-2 text-sm border rounded-md">Daten zurücksetzen (Demo)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section id="challenges" class="max-w-7xl mx-auto px-6 py-10">
+  <h2 class="text-2xl font-bold">Challenges</h2>
+  <p class="text-gray-600 mt-2">Tägliche und wöchentliche Challenges motivieren zu mehr Rückgaben.</p>
+  <div class="mt-6 grid md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h3 class="font-semibold">Aktuelle Challenges</h3>
+      <ul id="chList" class="mt-4 list-disc list-inside text-sm text-gray-700"></ul>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h3 class="font-semibold">Challenge einreichen</h3>
+      <p class="text-sm text-gray-600 mt-2">Lade ein Foto hoch, wenn du einen Becher zurückgegeben hast — das System gibt Punkte (Demo).</p>
+      <form id="uploadForm" class="mt-4">
+        <input id="photoInput" accept="image/*" type="file" class="block w-full text-sm text-gray-700">
+        <div class="mt-3 flex gap-3">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-lg" type="submit">Hochladen & Punkte</button>
+          <button id="clearUploads" class="px-4 py-2 border rounded-lg" type="button">Uploads löschen</button>
+        </div>
+      </form>
+      <div id="uploadPreview" class="mt-4 grid grid-cols-3 gap-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REWARDS SHOP -->
+<section id="rewards" class="max-w-7xl mx-auto px-6 py-10">
+  <h2 class="text-2xl font-bold">Rewards Shop</h2>
+  <p class="text-gray-600 mt-2">Löse deine Punkte ein — Demo: Punkte werden lokal abgezogen.</p>
+  <div class="mt-6 grid md:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded-xl shadow-sm">
+      <h4 class="font-semibold">Gratis Getränk</h4>
+      <p class="text-sm text-gray-600">Kosten: 50 Punkte</p>
+      <button data-cost="50" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm">
+      <h4 class="font-semibold">Elepfand Thermobecher</h4>
+      <p class="text-sm text-gray-600">Kosten: 700 Punkte</p>
+      <button data-cost="700" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm">
+      <h4 class="font-semibold">Elepfand+</h4>
+      <p class="text-sm text-gray-600">Kosten: 2500 Punkte</p>
+      <button data-cost="2500" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="bg-white/80 mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-10 grid gap-6 md:grid-cols-3">
+    <div>
+      <h4 class="text-lg font-bold">Elepfand</h4>
+      <p class="text-sm text-gray-600 mt-2">Mehrweg für alle — einfach, nachhaltig.</p>
+    </div>
+    <div>
+      <h5 class="font-semibold">Kontakt</h5>
+      <p class="text-sm text-gray-600 mt-2">hello@elepfand.de<br>+49 123 456 789</p>
+    </div>
+    <div>
+      <h5 class="font-semibold">Newsletter</h5>
+      <form class="mt-3 flex gap-2" onsubmit="event.preventDefault(); alert('Danke!');">
+        <input type="email" placeholder="Deine Mail" required class="px-3 py-2 rounded-md border border-gray-200 w-full">
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-md">Abonnieren</button>
       </form>
     </div>
   </div>
+  <div class="border-t border-gray-100 py-4 text-sm text-center text-gray-500">© 2025 Elepfand — Built with ♻️ & Charme</div>
+</footer>
 
-  <!-- FOOTER -->
-  <footer id="contact" class="bg-white/80 mt-12">
-    <div class="max-w-7xl mx-auto px-6 py-10 grid gap-6 md:grid-cols-3">
-      <div>
-        <h4 class="text-lg font-bold">Elepfand</h4>
-        <p class="text-sm text-gray-600 mt-2">Mehrweg für alle — einfach, nachhaltig.</p>
-      </div>
+<!-- SCRIPTS -->
+<script>
+const DEFAULT = { name:'Thomas', points:34, uploads:[], badges:['Starter'], level:'Bronze' };
+const USERS = {
+  'Thomas': { name:'Thomas', points:34, uploads:[], badges:['Starter'], level:'Bronze' },
+  'Samuel': { name:'Samuel', points:120, uploads:[], badges:['Starter'], level:'Silber' },
+  'Neal': { name:'Neal', points:800, uploads:[], badges:['Thermobecher'], level:'Gold' },
+  'Aaron': { name:'Aaron', points:2600, uploads:[], badges:['Elepfand+'], level:'Elepfand+' }
+};
 
-      <div>
-        <h5 class="font-semibold">Kontakt</h5>
-        <p class="text-sm text-gray-600 mt-2">hello@elepfand.de<br>+49 123 456 789</p>
-      </div>
+let state = {...DEFAULT};
 
-      <div>
-        <h5 class="font-semibold">Newsletter</h5>
-        <form class="mt-3 flex gap-2" onsubmit="event.preventDefault(); alert('Danke!');">
-          <input type="email" placeholder="Deine Mail" required class="px-3 py-2 rounded-md border border-gray-200 w-full">
-          <button class="px-4 py-2 bg-blue-600 text-white rounded-md">Abonnieren</button>
-        </form>
-      </div>
-    </div>
+function saveState(s){ localStorage.setItem('elepfand_demo', JSON.stringify(s)); renderAll(s); }
 
-    <div class="border-t border-gray-100 py-4 text-sm text-center text-gray-500">© 2025 Elepfand — Built with ♻️ & Charme</div>
-  </footer>
+function renderAll(s){
+  document.getElementById('profileName').textContent = s.name;
+  document.getElementById('miniPointsCount').textContent = s.points;
+  document.getElementById('pointCount').textContent = s.points;
+  document.getElementById('avatar').textContent = s.name.charAt(0).toUpperCase();
 
-  <!-- SCRIPT: STATE + POINTS + CHALLENGES + SHOP -->
-  <script>
-    const DEFAULT = {
-      name: 'Thomas',
-      points: 34,
-      uploads: [],
-      badges: ['Starter'],
-      level: 'Bronze'
-    };
+  // Level & Badges
+  if(s.points>=2500){ s.level='Elepfand+'; if(!s.badges.includes('Elepfand+')) s.badges.push('Elepfand+'); }
+  else if(s.points>=700){ s.level='Gold'; if(!s.badges.includes('Thermobecher')) s.badges.push('Thermobecher'); }
+  else if(s.points>=250){ s.level='Silber'; }
+  else s.level='Bronze';
 
-    function loadState(){
-      const raw = localStorage.getItem('elepfand_demo');
-      if(!raw){ localStorage.setItem('elepfand_demo', JSON.stringify(DEFAULT)); return {...DEFAULT}; }
-      try { return JSON.parse(raw); } catch(e){ localStorage.setItem('elepfand_demo', JSON.stringify(DEFAULT)); return {...DEFAULT}; }
-    }
+  document.getElementById('profileLevel').textContent = s.level;
 
-    function saveState(state){ localStorage.setItem('elepfand_demo', JSON.stringify(state)); renderAll(state); }
+  const badgesBox=document.getElementById('badges'); badgesBox.innerHTML='';
+  s.badges.forEach(b=>{ const el=document.createElement('div'); el.textContent=b; el.className='px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs'; badgesBox.appendChild(el); });
 
-    let state = loadState();
+  // Elepfand+ Vorteile
+  const plusSection=document.getElementById('elepfandPlusSection');
+  plusSection.style.display = (s.level==='Elepfand+')?'block':'none';
 
-    function addBadgeIfNeeded(name){
-      if(!state.badges.includes(name)){ state.badges.push(name); saveState(state); }
-    }
+  // Progress bar
+  let next = s.points<50?50:s.points<700?700:2500;
+  document.getElementById('progressBar').style.width = Math.min(100,(s.points/next)*100)+'%';
+  document.getElementById('nextRewardText').textContent = `${s.points}/${next} Punkten bis zur nächsten Belohnung`;
 
-    function renderAll(s){
-      document.getElementById('profileName').textContent = s.name;
-      document.getElementById('miniPointsCount').textContent = s.points;
-      document.getElementById('pointCount').textContent = s.points;
-      document.getElementById('avatar').textContent = s.name.charAt(0).toUpperCase();
+  // Uploads
+  const upDiv=document.getElementById('uploadPreview'); upDiv.innerHTML='';
+  s.uploads.forEach(f=>{
+    const img=document.createElement('img'); img.src=f; img.className='w-full h-20 object-cover rounded-md'; upDiv.appendChild(img);
+  });
+}
 
-      // Level + Badge
-      if(s.points >= 2500){ s.level='Elepfand+'; addBadgeIfNeeded('Elepfand+'); }
-      else if(s.points >= 700){ s.level='Gold'; addBadgeIfNeeded('Thermobecher'); }
-      else if(s.points >= 250){ s.level='Silber'; }
+// Buttons
+document.getElementById('simulateDrop').onclick=()=>{ state.points +=5; if(state.level==='Elepfand+') state.points+=Math.floor(5*0.1); saveState(state); };
+document.getElementById('addTen').onclick=()=>{ state.points +=10; if(state.level==='Elepfand+') state.points+=Math.floor(10*0.1); saveState(state); };
+document.getElementById('resetBtn').onclick=()=>{ state={...DEFAULT}; saveState(state); alert('Demo zurückgesetzt'); };
 
-      document.getElementById('profileLevel').textContent = s.level;
+// Upload
+document.getElementById('uploadForm').onsubmit=(e)=>{
+  e.preventDefault();
+  const file=document.getElementById('photoInput').files[0];
+  if(!file) return alert('Bitte Datei wählen');
+  const reader=new FileReader();
+  reader.onload=()=>{ state.uploads.push(reader.result); state.points+=10; saveState(state); };
+  reader.readAsDataURL(file);
+};
+document.getElementById('clearUploads').onclick=()=>{ state.uploads=[]; saveState(state); };
 
-      // Badges Render
-      const badgesBox = document.getElementById('badges');
-      badgesBox.innerHTML = '';
-      s.badges.forEach(b=>{ const el = document.createElement('div'); el.textContent=b; el.className='px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-xs'; badgesBox.appendChild(el); });
+// Challenges
+const challenges=['7 Becher in einer Woche zurückgeben','Foto vom Thermobecher posten','Freund einladen und Punkte erhalten','10 Becher am Wochenende'];
+const chList=document.getElementById('chList'); chList.innerHTML=''; challenges.forEach(c=>{ const li=document.createElement('li'); li.textContent=c; chList.appendChild(li); });
 
-      // Progress & nextReward
-      let next = s.points<50?50:s.points<700?700:2500;
-      document.getElementById('progressBar').style.width = Math.min(100,(s.points/next)*100)+'%';
-      document.getElementById('nextRewardText').textContent = `${s.points}/${next} Punkten bis zur nächsten Belohnung`;
+// Shop buttons
+document.querySelectorAll('.buyBtn').forEach(btn=>{
+  btn.onclick=()=>{ const cost=parseInt(btn.dataset.cost); if(state.points>=cost){ state.points-=cost; alert(`Reward für ${cost} Punkte eingelöst!`); saveState(state); } else alert('Nicht genug Punkte!'); };
+});
 
-      // Upload preview
-      const upDiv = document.getElementById('uploadPreview');
-      upDiv.innerHTML='';
-      s.uploads.forEach(f=>{
-        const img = document.createElement('img');
-        img.src = f;
-        img.className='w-full h-20 object-cover rounded-md';
-        upDiv.appendChild(img);
-      });
-    }
+// Login
+document.getElementById('loginForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name=document.getElementById('loginName').value.trim();
+  if(!name){ alert('Bitte einen Namen eingeben'); return; }
+  if(USERS[name]){ state={...USERS[name]}; saveState(state); document.getElementById('login').style.display='none'; alert(`Hallo ${name}!`); }
+  else alert('Benutzer nicht gefunden. Demo-Benutzer: Thomas, Samuel, Neal, Aaron');
+});
 
-    renderAll(state);
+// Load localStorage
+const saved=localStorage.getItem('elepfand_demo');
+if(saved){ state=JSON.parse(saved); renderAll(state); }
+else renderAll(state);
 
-    // Buttons
-    document.getElementById('simulateDrop').onclick=()=>{
-      state.points +=5;
-      saveState(state);
-    }
-    document.getElementById('addTen').onclick=()=>{
-      state.points +=10;
-      saveState(state);
-    }
+// Confetti
+function createConfetti(){ const c=document.createElement('div'); c.className='confetti'; c.style.left=Math.random()*window.innerWidth+'px'; c.style.top=Math.random()*window.innerHeight+'px'; c.style.background=['#3B82F6','#16A34A','#FBBF24','#EF4444'][Math.floor(Math.random()*4)]; document.getElementById('confetti').appendChild(c); setTimeout(()=>c.remove(),3000); }
+setInterval(createConfetti,500);
+</script>
 
-    document.getElementById('resetBtn').onclick=()=>{
-      if(confirm('Demo zurücksetzen?')){
-        state={...DEFAULT};
-        saveState(state);
-      }
-    }
-
-    // Uploads
-    document.getElementById('uploadForm').onsubmit = e=>{
-      e.preventDefault();
-      const file = document.getElementById('photoInput').files[0];
-      if(file){
-        const reader = new FileReader();
-        reader.onload = evt=>{
-          state.uploads.push(evt.target.result);
-          state.points +=20;
-          saveState(state);
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-    document.getElementById('clearUploads').onclick=()=>{
-      state.uploads=[];
-      saveState(state);
-    }
-
-    // Shop
-    document.querySelectorAll('.buyBtn').forEach(btn=>{
-      btn.onclick=()=>{
-        const cost = parseInt(btn.dataset.cost);
-        if(state.points>=cost){
-          state.points-=cost;
-          alert(`Reward eingelöst! (${cost} Punkte)`);
-          saveState(state);
-        }else alert('Nicht genug Punkte!');
-      }
-    });
-
-    // Bot
-    document.getElementById('botForm').onsubmit=e=>{
-      e.preventDefault();
-      const msg = document.getElementById('botInput').value.trim();
-      if(!msg) return;
-      const box = document.getElementById('botMessages');
-      box.innerHTML += `<div>Du: ${msg}</div>`;
-      box.innerHTML += `<div>Bot: Cool! Du hast ${state.points} Punkte.</div>`;
-      box.scrollTop=box.scrollHeight;
-      document.getElementById('botInput').value='';
-    }
-
-    // Demo challenges
-    const challenges=['Challenge 1: 5 Becher zurückgeben','Challenge 2: 20 Punkte in 1 Tag','Challenge 3: Lade ein Bild hoch'];
-    const chList = document.getElementById('chList');
-    challenges.forEach(c=>{
-      const li=document.createElement('li'); li.textContent=c; chList.appendChild(li);
-    });
-  </script>
 </body>
 </html>
+
 
 
 
