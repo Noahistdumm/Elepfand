@@ -5,30 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Elepfand — Mehrweg für alle</title>
   <meta name="description" content="Elepfand: Universelles Mehrweg-Pfandsystem für Cafés, Shops und Lieferdienste." />
-  <!-- Tailwind via CDN for quick prototype -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ele-blue: #3B82F6; /* primary blue */
-      --ele-green: #16A34A; /* recycle green */
-      --ele-dark: #0F172A;  /* dark text */
-    }
-    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
   <!-- NAV -->
   <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#hero" class="flex items-center gap-3">
-        <!-- Replace the src with your actual logo file (e.g. assets/elepfand-logo.png) -->
-        <img src="elepfand.PNG") }]} alt="Elepfand Logo" class="w-12 h-12 rounded-md" onerror="this.style.display='none'">
-        <span class="font-extrabold text-xl" style="color:var(--ele-dark)">Elepfand</span>
+        <img src="elepfand.PNG" alt="Elepfand Logo" class="w-12 h-12 rounded-md" onerror="this.style.display='none'">
+        <span class="font-extrabold text-xl text-slate-900">Elepfand</span>
       </a>
       <nav class="hidden md:flex gap-6 items-center text-sm">
         <a href="#how" class="hover:underline">Wie's funktioniert</a>
         <a href="#partners" class="hover:underline">Für Partner</a>
+        <a href="#points" class="hover:underline">Punkte</a>
         <a href="#map" class="hover:underline">Rückgabe</a>
         <a href="#contact" class="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2 rounded-full text-sm shadow">Partner werden</a>
       </nav>
@@ -40,7 +31,7 @@
   <section id="hero" class="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
     <div class="flex-1">
       <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Elepfand — das universelle Mehrwegsystem</h1>
-      <p class="mt-4 text-lg text-gray-600">Einfach. Lokal. Circular. Nutze einen Behälter, scan den QR-Code, gib ihn zurück — Pfand wird automatisch gutgeschrieben. Für Cafés, Lieferdienste & Shops.</p>
+      <p class="mt-4 text-lg text-gray-600">Einfach. Lokal. Circular. Nutze einen Behälter, scan den QR-Code, gib ihn zurück — Pfand wird automatisch gutgeschrieben.</p>
 
       <div class="mt-8 flex gap-3">
         <a href="#partners" class="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold shadow hover:opacity-95">Partner werden</a>
@@ -64,11 +55,41 @@
     </div>
 
     <div class="flex-1 flex items-center justify-center">
-      <!-- App mockup / hero image placeholder -->
       <div class="w-80 h-80 bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl flex items-center justify-center shadow-lg">
         <div class="text-center">
-          <img src="elepfand.PNG") }]} alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
+          <img src="elepfand.PNG" alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
           <p class="mt-4 text-sm text-gray-500">Logo / App Mockup</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Punkte-System Preview -->
+  <section id="points" class="max-w-6xl mx-auto px-6 py-14">
+    <h2 class="text-3xl font-extrabold">Punkte-System (Vorschau)</h2>
+    <p class="mt-2 text-gray-600">Für jeden zurückgegebenen Elepfand-Becher sammelst du Punkte. Bei 50 Punkten bekommst du deine erste Belohnung!</p>
+
+    <div class="mt-8 bg-white rounded-2xl shadow p-6">
+      <h3 class="text-xl font-semibold mb-3">Dein Fortschritt</h3>
+
+      <div class="w-full bg-gray-200 h-4 rounded-full overflow-hidden shadow-inner">
+        <div class="bg-green-500 h-full" style="width: 68%"></div>
+      </div>
+
+      <p class="mt-3 text-gray-700 font-medium">34 / 50 Punkten erreicht 🎉</p>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-4">
+        <div class="p-4 bg-green-50 border border-green-200 rounded-xl">
+          <p class="font-semibold text-green-800">Belohnung bei 50 Punkten</p>
+          <p class="text-sm text-green-700 mt-1">1 Gratis-Getränk bei allen teilnehmenden Cafés.</p>
+        </div>
+        <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+          <p class="font-semibold text-blue-800">Belohnung bei 100 Punkten</p>
+          <p class="text-sm text-blue-700 mt-1">Exklusiver Elepfand-Mehrwegbecher.</p>
+        </div>
+        <div class="p-4 bg-purple-50 border border-purple-200 rounded-xl">
+          <p class="font-semibold text-purple-800">Belohnung bei 250 Punkten</p>
+          <p class="text-sm text-purple-700 mt-1">Premium-Status: doppelte Punkte für 7 Tage.</p>
         </div>
       </div>
     </div>
@@ -96,51 +117,26 @@
     </div>
   </section>
 
-  <!-- Partners -->
-  <section id="partners" class="max-w-6xl mx-auto px-6 py-12">
-    <h2 class="text-2xl font-bold">Für Partner</h2>
-    <p class="mt-3 text-gray-600">Kleine Läden sparen Kosten. Kund*innen lieben die Bequemlichkeit. Staatliche Förderungen möglich.</p>
-
-    <div class="mt-6 grid gap-6 md:grid-cols-2">
-      <div class="p-6 bg-white rounded-lg shadow-sm">
-        <h3 class="font-semibold">Was wir bieten</h3>
-        <ul class="mt-3 list-disc list-inside text-sm text-gray-600">
-          <li>Einfaches QR-basiertes Check-in/out</li>
-          <li>Automatische Abrechnung & Rückerstattung</li>
-          <li>Dashboard: Umläufe & CO₂-Report</li>
-        </ul>
-      </div>
-      <div class="p-6 bg-white rounded-lg shadow-sm">
-        <h3 class="font-semibold">Technik</h3>
-        <p class="mt-2 text-sm text-gray-600">Cloud-Dashboard, einfache API, optionale Retouren-Automaten.</p>
-      </div>
-    </div>
-
-    <div class="mt-6">
-      <a href="#contact" class="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-green-500 text-white font-semibold">Jetzt Partner werden</a>
-    </div>
-  </section>
-
-  <!-- Map / Return spots (placeholder) -->
+  <!-- MAP -->
   <section id="map" class="max-w-6xl mx-auto px-6 py-12">
     <h2 class="text-2xl font-bold">Rückgabestellen</h2>
-    <p class="mt-2 text-gray-600">Karte folgt — wir fügen deine Stadt als nächstes hinzu.</p>
-    <div class="mt-6 h-64 bg-white rounded-lg shadow-sm flex items-center justify-center text-gray-400"><iframe class="w-full h-full rounded-lg" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2511.159267588901!2d7.628202276788213!3d51.96251097971316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9ba827b76953f%3A0xdeaaf0c12597c7c5!2sM%C3%BCnster!5e0!3m2!1sde!2sde!4v0000000000000"></iframe></div>
+    <p class="mt-2 text-gray-600">Karte folgt — deine Stadt kommt als nächstes!</p>
+    <div class="mt-6 h-64 bg-white rounded-lg shadow-sm flex items-center justify-center text-gray-400">
+      <iframe class="w-full h-full rounded-lg" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2511.159267588901!2d7.628202276788213!3d51.96251097971316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9ba827b76953f%3A0xdeaaf0c12597c7c5!2sM%C3%BCnster!5e0!3m2!1sde!2sde!4v0000000000000"></iframe>
+    </div>
   </section>
 
-  <!-- Contact / Footer -->
+  <!-- FOOTER -->
   <footer id="contact" class="bg-white/80 mt-12">
     <div class="max-w-6xl mx-auto px-6 py-10 grid gap-6 md:grid-cols-3">
       <div>
         <h4 class="text-lg font-bold">Elepfand</h4>
-        <p class="text-sm text-gray-600 mt-2">Mehrweg für alle — einfach, lokal & nachhaltig.</p>
+        <p class="text-sm text-gray-600 mt-2">Mehrweg für alle — einfach, nachhaltig.</p>
       </div>
-
       <div>
         <h5 class="font-semibold">Kontakt</h5>
         <p class="text-sm text-gray-600 mt-2">hello@elepfand.de<br>+49 123 456 789</p>
       </div>
-
       <div>
         <h5 class="font-semibold">Newsletter</h5>
         <form class="mt-3 flex gap-2" onsubmit="event.preventDefault(); alert('Danke!');">
@@ -149,14 +145,8 @@
         </form>
       </div>
     </div>
-
-    <div class="border-t border-gray-100 py-4 text-sm text-center text-gray-500">© 2025 Elepfand — Built with ♻️ & Elefant-Charme</div>
+    <div class="border-t border-gray-100 py-4 text-sm text-center text-gray-500">© 2025 Elepfand — Built with ♻️ & Charme</div>
   </footer>
-
-  <!-- Small script for interactive placeholders -->
-  <script>
-    // Placeholder: replace with real map integration and dynamic data.
-    // Replace logo src attributes with the generated logo file path (e.g. assets/elepfand-logo.png)
-  </script>
 </body>
 </html>
+
