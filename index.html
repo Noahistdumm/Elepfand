@@ -4,12 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Elepfand — Vollversion (Elepfand+)</title>
-  <meta name="description" content="Elepfand Demo: Punkte, Rewards, Challenges, Profile, Map, Chatbot, Elepfand+" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{--ele-blue:#3B82F6;--ele-green:#16A34A;}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    body{font-family:'Inter',system-ui}
     .confetti{position:absolute;pointer-events:none;width:8px;height:8px;border-radius:999px;opacity:0.9}
   </style>
 </head>
@@ -28,10 +26,7 @@
 <!-- NAV -->
 <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm mt-6">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#hero" class="flex items-center gap-3">
-      <img src="elepfand.PNG" alt="Elepfand Logo" class="w-12 h-12 rounded-md" onerror="this.style.display='none'">
-      <span class="font-extrabold text-xl text-slate-900">Elepfand</span>
-    </a>
+    <span class="font-extrabold text-xl text-slate-900">Elepfand</span>
   </div>
 </header>
 
@@ -46,9 +41,7 @@
   </div>
   <div class="flex-1 flex items-center justify-center">
     <div class="w-80 h-80 bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl flex items-center justify-center shadow-lg relative overflow-hidden">
-      <div class="text-center">
-        <img src="elepfand.PNG" alt="Elepfand Logo" class="mx-auto w-36 h-36" onerror="this.style.display='none'">
-      </div>
+      <div class="text-center">🐘</div>
       <div id="confetti" class="absolute inset-0 pointer-events-none"></div>
     </div>
   </div>
@@ -59,7 +52,6 @@
   <div class="grid lg:grid-cols-2 gap-8">
     <div class="bg-white rounded-2xl p-6 shadow-sm">
       <h2 class="text-2xl font-bold">Punktesystem</h2>
-      <p class="mt-2 text-gray-600">Jede Rückgabe bringt Punkte + Elepfand+ Bonus.</p>
 
       <div class="mt-6">
         <div class="flex justify-between mb-2">
@@ -78,7 +70,7 @@
       </div>
     </div>
 
-    <!-- PROFILE + BADGES -->
+    <!-- PROFILE -->
     <div class="bg-white rounded-2xl p-6 shadow-sm">
       <h3 class="text-xl font-semibold">Dein Profil</h3>
       <div class="mt-4 flex items-center gap-4">
@@ -89,18 +81,13 @@
         </div>
       </div>
 
-      <div class="mt-6">
-        <h4 class="font-semibold">Badges</h4>
-        <div id="badges" class="mt-3 flex gap-3 flex-wrap"></div>
-      </div>
-
-      <div id="elepfandPlusSection" style="display:none;">
+      <div id="elepfandPlusSection" class="mt-6 hidden">
         <h4 class="font-semibold text-green-600">Elepfand+ Vorteile</h4>
         <ul class="mt-2 text-sm text-gray-700 list-disc list-inside">
-          <li>Exklusive Events & Community-Challenges</li>
-          <li>10% Extra-Punkte auf jede Rückgabe</li>
+          <li>Exklusive Events</li>
+          <li>10% Extra-Punkte</li>
           <li>VIP Support</li>
-          <li>Frühzugang zu neuen Rewards</li>
+          <li>Frühzugang</li>
         </ul>
       </div>
     </div>
@@ -110,15 +97,14 @@
 <!-- CHALLENGES -->
 <section id="challenges" class="max-w-7xl mx-auto px-6 py-10">
   <h2 class="text-2xl font-bold">Challenges</h2>
-  <p class="text-gray-600 mt-2">Alle Challenges freigeschaltet.</p>
 
   <div class="mt-6 grid md:grid-cols-2 gap-6">
     <div class="bg-white rounded-xl p-6 shadow-sm">
       <h3 class="font-semibold">Aktuelle Challenges</h3>
       <ul id="chList" class="mt-4 list-disc list-inside text-sm text-gray-700">
-        <li>7 Becher in einer Woche zurückgeben</li>
+        <li>7 Becher in einer Woche</li>
         <li>Foto vom Thermobecher posten</li>
-        <li>Freund einladen und Punkte erhalten</li>
+        <li>Freund einladen</li>
         <li>10 Becher am Wochenende</li>
       </ul>
     </div>
@@ -126,8 +112,8 @@
     <div class="bg-white rounded-xl p-6 shadow-sm">
       <h3 class="font-semibold">Challenge einreichen</h3>
       <form id="uploadForm" class="mt-4">
-        <input id="photoInput" accept="image/*" type="file" class="block w-full text-sm text-gray-700">
-        <div class="mt-3 flex gap-3">
+        <input id="photoInput" accept="image/*" type="file" class="block w-full text-sm text-gray-700" />
+        <div class="mt-3">
           <button class="px-4 py-2 bg-blue-600 text-white rounded-lg" type="submit">Hochladen & Punkte</button>
         </div>
       </form>
@@ -136,11 +122,9 @@
   </div>
 </section>
 
-<!-- REWARDS SHOP -->
+<!-- REWARDS -->
 <section id="rewards" class="max-w-7xl mx-auto px-6 py-10">
   <h2 class="text-2xl font-bold">Rewards Shop</h2>
-  <p class="text-gray-600 mt-2">Alle Belohnungen verfügbar.</p>
-
   <div class="mt-6 grid md:grid-cols-3 gap-6">
     <div class="bg-white p-4 rounded-xl shadow-sm">
       <h4 class="font-semibold">Gratis Getränk</h4>
@@ -149,34 +133,16 @@
     </div>
     <div class="bg-white p-4 rounded-xl shadow-sm">
       <h4 class="font-semibold">Elepfand Thermobecher</h4>
-      <p class="text-sm text-gray-600">Kosten: 1000 Punkte</p>
-      <button data-cost="1000" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+      <p class="text-sm text-gray-600">Kosten: 700 Punkte</p>
+      <button data-cost="700" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
     </div>
     <div class="bg-white p-4 rounded-xl shadow-sm">
-      <h4 class="font-semibold">Elepfand+</h4>
-      <p class="text-sm text-gray-600">Kosten: 2500 Punkte</p>
-      <button data-cost="2500" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
+      <h4 class="font-semibold">Special Item</h4>
+      <p class="text-sm text-gray-600">Kosten: 1100 Punkte</p>
+      <button data-cost="1100" class="mt-3 px-4 py-2 bg-green-600 text-white rounded-lg buyBtn">Einlösen</button>
     </div>
   </div>
 </section>
-
-<!-- CHATBOT -->
-<div class="fixed right-6 bottom-6">
-  <div class="bg-white rounded-2xl shadow-lg w-80 p-4" id="chatbotBox">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold">🐘</div>
-      <div>
-        <div class="font-semibold">Elepfand-Bot</div>
-        <div class="text-xs text-gray-500">Dein Nachhaltigkeits-Mate</div>
-      </div>
-    </div>
-    <div class="mt-3 text-sm text-gray-700 h-28 overflow-auto" id="botMessages">Hey! Willkommen!</div>
-    <form id="botForm" class="mt-3 flex gap-2">
-      <input id="botInput" class="flex-1 px-3 py-2 border rounded-md text-sm" placeholder="Sag dem Elepfand-Bot was" />
-      <button class="px-3 py-2 bg-blue-600 text-white rounded-md">Send</button>
-    </form>
-  </div>
-</div>
 
 <script>
 const USERS = {
@@ -186,63 +152,88 @@ const USERS = {
   Aaron: {plus:false, points:80}
 };
 
-let state = {};
+let state = {name:"User", points:0, plus:false};
+
+function updateProgress(){
+  let goal = 50;
+  let needed = goal - state.points;
+  if(needed < 0) needed = 0;
+  document.getElementById("nextRewardText").textContent = needed+" Punkte bis zur nächsten Belohnung";
+  let percent = Math.min(100, (state.points/goal)*100);
+  document.getElementById("progressBar").style.width = percent+"%";
+}
+
 function renderUser(){
   document.getElementById('profileName').textContent = state.name;
   document.getElementById('pointCount').textContent = state.points;
   document.getElementById('avatar').textContent = state.name.charAt(0).toUpperCase();
   document.getElementById('profileLevel').textContent = state.plus ? 'Elepfand+' : 'Standard';
-  document.getElementById('elepfandPlusSection').style.display = state.plus ? 'block' : 'none';
-  document.getElementById('adBanner').style.display = state.plus ? 'none' : 'block';
+  document.getElementById('elepfandPlusSection').classList.toggle("hidden", !state.plus);
+  document.getElementById('adBanner').classList.toggle("hidden", state.plus);
+  updateProgress();
 }
 
 document.getElementById('loginForm').addEventListener('submit', e=>{
   e.preventDefault();
-  const name = document.getElementById('loginName').value.trim();
-  if(!USERS[name]) { alert('Benutzer nicht gefunden!'); return; }
+  const name = loginName.value.trim();
+  if(!USERS[name]) return alert("Benutzer nicht gefunden!");
   state = {...USERS[name], name};
   renderUser();
 });
 
-// Punkte Buttons
 document.getElementById('simulateDrop').addEventListener('click', ()=>{
-  let bonus = state.plus ? 5 + Math.floor(5*0.1) : 5;
+  let bonus = state.plus ? 6 : 5;
   state.points += bonus;
   renderUser();
   fireConfetti();
 });
+
 document.getElementById('addTen').addEventListener('click', ()=>{
   state.points += 10;
   renderUser();
 });
 
-// Confetti
 function fireConfetti(){
   const wrap = document.getElementById('confetti');
   for(let i=0;i<18;i++){
-    const d=document.createElement('div'); d.className='confetti';
+    const d=document.createElement('div');
+    d.className='confetti';
     d.style.left = Math.random()*90 + '%';
-    d.style.top = Math.random()*-10 + '%';
+    d.style.top = '-10%';
     d.style.background = `hsl(${Math.random()*360} 80% 60%)`;
     wrap.appendChild(d);
-    animateConf(d);
-    setTimeout(()=>d.remove(),1500);
+    d.animate([{transform:'translateY(0)'},{transform:'translateY(200px)'}],{duration:800});
+    setTimeout(()=>d.remove(),900);
   }
 }
-function animateConf(el){
-  el.animate([{transform:'translateY(0) rotate(0) scale(1)'},{transform:`translateY(${120+Math.random()*120}px) rotate(${Math.random()*720}deg) scale(.9)`}],{duration:1200+Math.random()*400,easing:'cubic-bezier(.2,.7,.2,1)'});
-}
 
-// Rewards Shop
-document.querySelectorAll('.buyBtn').forEach(b=>{
-  b.addEventListener('click', e=>{
-    const cost = parseInt(e.currentTarget.dataset.cost,10);
-    if(state.points >= cost){ state.points -= cost; renderUser(); alert('Belohnung eingelöst!'); }
-    else alert('Nicht genug Punkte.');
+document.querySelectorAll('.buyBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const cost = parseInt(btn.dataset.cost);
+    if(state.points >= cost){
+      state.points -= cost;
+      renderUser();
+      alert("Belohnung eingelöst!");
+    } else alert("Nicht genug Punkte!");
   });
+});
+
+document.getElementById("uploadForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const file = photoInput.files[0];
+  if(!file) return;
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.className = "w-full h-24 object-cover rounded-md";
+  uploadPreview.appendChild(img);
+
+  state.points += 20;
+  renderUser();
 });
 </script>
 </body>
 </html>
+
 
 
