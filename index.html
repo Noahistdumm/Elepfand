@@ -3,12 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elepfand V2 Demo</title>
+  <title>Elepfand V2.5 Demo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body{font-family:'Inter'}
-    .confetti{position:absolute;width:8px;height:8px;border-radius:999px;pointer-events:none}
+    .confetti{
+      position:absolute;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      pointer-events:none;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -16,7 +22,7 @@
 <header class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3">
     <img src="elepfand.PNG" class="w-12 h-12 rounded" onerror="this.style.display='none'">
-    <h1 class="text-2xl font-extrabold">Elepfand</h1>
+    <h1 class="text-2xl font-extrabold">Elepfand V2.5</h1>
   </div>
 </header>
 
@@ -33,14 +39,14 @@
 
 <section id="main" class="max-w-7xl mx-auto px-6 py-10 hidden">
   <div class="grid lg:grid-cols-2 gap-8">
-
     <div class="bg-white p-6 rounded-2xl shadow">
       <h3 class="text-xl font-bold">Deine Punkte</h3>
       <p class="mt-2 text-gray-600">Punkte durch QR-Code nach Rückgabe.</p>
       <div class="mt-4 text-3xl font-extrabold text-blue-600" id="pointCount">0</div>
-
-      <button id="openContainer" class="mt-6 px-4 py-2 bg-green-600 text-white rounded w-full">Becher in Container werfen</button>
-      <button id="addCup" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded w-full">Becher hinzufügen (Demo)</button>
+      <button id="addCup" class="mt-6 px-4 py-2 bg-purple-600 text-white rounded w-full">Becher hinzufügen</button>
+      <button id="scanAll" class="mt-2 px-4 py-2 bg-green-600 text-white rounded w-full">QR-Code scannen & Punkte holen</button>
+      <div id="cupCount" class="mt-2 text-gray-600">Gesammelte Becher: 0</div>
+      <div id="lastPoints" class="mt-2 text-gray-600">Zuletzt erhalten: 0 Punkte</div>
     </div>
 
     <div class="bg-white p-6 rounded-2xl shadow">
@@ -97,6 +103,7 @@ const USERS = {
 };
 
 let state = {};
+let cupCount = 0;
 
 function renderUser(){
   document.getElementById("avatar").textContent = state.name.charAt(0).toUpperCase();
@@ -116,22 +123,22 @@ document.getElementById("loginForm").addEventListener("submit", e=>{
   renderUser();
 });
 
-// Becher in Container (QR Scan)
-document.getElementById("openContainer").onclick = ()=>{
+// Becher hinzufügen
+document.getElementById("addCup").onclick = () => {
+  cupCount++;
+  document.getElementById("cupCount").textContent = "Gesammelte Becher: " + cupCount;
+};
+
+// QR-Code scannen & Punkte holen
+document.getElementById("scanAll").onclick = () => {
+  if(cupCount === 0) return alert("Keine Becher zum Scannen!");
   document.getElementById("qrcode").classList.remove("hidden");
-  document.getElementById("qrcode").scrollIntoView({behavior:"smooth"});
+  document.getElementById("qrcode").scrollIntoView({ behavior: "smooth" });
   startScanner();
 };
 
-// Demo Button: Becher hinzufügen
-document.getElementById("addCup").onclick = () => {
-  document.getElementById("qrcode").classList.remove("hidden");
-  document.getElementById("qrcode").scrollIntoView({ behavior: "smooth" });
-  startScanner(true);
-};
-
 // QR Scanner Funktion
-function startScanner(demo = false){
+function startScanner() {
   const qrReader = new Html5Qrcode("qr-reader");
   const config = { fps: 10, qrbox: 250 };
 
@@ -141,17 +148,35 @@ function startScanner(demo = false){
     qrMsg => {
       document.getElementById("qr-result").innerText = "Gefunden: " + qrMsg;
 
-      if(demo || qrMsg.toLowerCase().includes("qr.link/2w98nl")){
-        let pts = 5;
+      if(qrMsg.toLowerCase().includes("qr.link/2w98nl")){
+        let pts = 5 * cupCount;
         if(state.plus) pts = Math.floor(pts * 1.1);
         state.points += pts;
         renderUser();
-        alert(`+${pts} Punkte erhalten!`);
+        document.getElementById("lastPoints").textContent = `Zuletzt erhalten: ${pts} Punkte`;
+        confettiBlast();
+        cupCount = 0;
+        document.getElementById("cupCount").textContent = "Gesammelte Becher: 0";
         qrReader.stop();
       }
     },
     ()=>{}
   );
+}
+
+// Confetti Effekt
+function confettiBlast(){
+  for(let i=0;i<100;i++){
+    const confetti = document.createElement("div");
+    confetti.className="confetti";
+    confetti.style.left=Math.random()*window.innerWidth+"px";
+    confetti.style.top="-10px";
+    confetti.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(confetti);
+    let fallDuration = 1000 + Math.random()*1000;
+    confetti.animate([{transform:"translateY(0) rotate(0deg)"},{transform:`translateY(${window.innerHeight}px) rotate(${Math.random()*720}deg)`}],{duration:fallDuration, easing:"linear"});
+    setTimeout(()=>confetti.remove(),fallDuration);
+  }
 }
 
 // Rewards Shop
@@ -168,6 +193,7 @@ document.querySelectorAll('.buyBtn').forEach(btn=>{
 </script>
 </body>
 </html>
+
 
 
 
