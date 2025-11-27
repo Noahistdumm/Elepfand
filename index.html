@@ -131,7 +131,7 @@ function startScanner(){
     qrMsg => {
       document.getElementById("qr-result").innerText = "Gefunden: " + qrMsg;
 
-      if(qrMsg.includes("noahistdumm.github.io/Elepfand#qrcode")){
+     if (qrMsg.toLowerCase().includes("qr.link/2w98nl")) {
         let pts = 5;
         if(state.plus) pts = Math.floor(pts * 1.1);
         state.points += pts;
