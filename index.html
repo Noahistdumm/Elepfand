@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elepfand V2</title>
+  <title>Elepfand V2 Demo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
@@ -40,6 +40,7 @@
       <div class="mt-4 text-3xl font-extrabold text-blue-600" id="pointCount">0</div>
 
       <button id="openContainer" class="mt-6 px-4 py-2 bg-green-600 text-white rounded w-full">Becher in Container werfen</button>
+      <button id="addCup" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded w-full">Becher hinzufügen (Demo)</button>
     </div>
 
     <div class="bg-white p-6 rounded-2xl shadow">
@@ -105,6 +106,7 @@ function renderUser(){
   document.getElementById("plusInfo").style.display = state.plus ? "block" : "none";
 }
 
+// Login
 document.getElementById("loginForm").addEventListener("submit", e=>{
   e.preventDefault();
   const name = loginName.value.trim();
@@ -114,14 +116,22 @@ document.getElementById("loginForm").addEventListener("submit", e=>{
   renderUser();
 });
 
+// Becher in Container (QR Scan)
 document.getElementById("openContainer").onclick = ()=>{
-  window.location.hash = "#qrcode";
   document.getElementById("qrcode").classList.remove("hidden");
   document.getElementById("qrcode").scrollIntoView({behavior:"smooth"});
   startScanner();
 };
 
-function startScanner(){
+// Demo Button: Becher hinzufügen
+document.getElementById("addCup").onclick = () => {
+  document.getElementById("qrcode").classList.remove("hidden");
+  document.getElementById("qrcode").scrollIntoView({ behavior: "smooth" });
+  startScanner(true);
+};
+
+// QR Scanner Funktion
+function startScanner(demo = false){
   const qrReader = new Html5Qrcode("qr-reader");
   const config = { fps: 10, qrbox: 250 };
 
@@ -131,7 +141,7 @@ function startScanner(){
     qrMsg => {
       document.getElementById("qr-result").innerText = "Gefunden: " + qrMsg;
 
-     if (qrMsg.toLowerCase().includes("qr.link/2w98nl")) {
+      if(demo || qrMsg.toLowerCase().includes("qr.link/2w98nl")){
         let pts = 5;
         if(state.plus) pts = Math.floor(pts * 1.1);
         state.points += pts;
@@ -144,6 +154,7 @@ function startScanner(){
   );
 }
 
+// Rewards Shop
 document.querySelectorAll('.buyBtn').forEach(btn=>{
   btn.onclick = ()=>{
     const cost = parseInt(btn.dataset.cost);
@@ -157,6 +168,7 @@ document.querySelectorAll('.buyBtn').forEach(btn=>{
 </script>
 </body>
 </html>
+
 
 
 
