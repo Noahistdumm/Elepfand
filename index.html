@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elepfand V2.6 Demo</title>
+  <title>Elepfand V2.7 Demo</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <style>
     body{font-family:'Inter'}
     .confetti{
@@ -25,12 +31,12 @@
     }
   </style>
 </head>
+
 <body class="bg-gray-100 text-gray-900">
 
 <header class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3">
-    <img src="elepfand.PNG" class="w-12 h-12 rounded" onerror="this.style.display='none'">
-    <h1 class="text-2xl font-extrabold">Elepfand V2.6</h1>
+    <h1 class="text-2xl font-extrabold">Elepfand V2.7</h1>
   </div>
 </header>
 
@@ -46,15 +52,26 @@
 </section>
 
 <section id="main" class="max-w-7xl mx-auto px-6 py-10 hidden">
+
   <div class="grid lg:grid-cols-2 gap-8">
+
     <div class="bg-white p-6 rounded-2xl shadow relative">
       <h3 class="text-xl font-bold">Deine Punkte</h3>
       <p class="mt-2 text-gray-600">Punkte durch QR-Code nach Rückgabe.</p>
+
       <div class="mt-4 text-3xl font-extrabold text-blue-600" id="pointCount">0</div>
 
-      <button id="addCup" class="mt-6 px-4 py-2 bg-purple-600 text-white rounded w-full">Becher hinzufügen</button>
-      <button id="scanAll" class="mt-2 px-4 py-2 bg-green-600 text-white rounded w-full">QR-Code scannen & Punkte holen</button>
-      <button id="repeatScan" class="mt-2 px-4 py-2 bg-orange-600 text-white rounded w-full hidden">Scan wiederholen</button>
+      <button id="addCup" class="mt-6 px-4 py-2 bg-purple-600 text-white rounded w-full">
+        Becher hinzufügen
+      </button>
+
+      <button id="scanAll" class="mt-2 px-4 py-2 bg-green-600 text-white rounded w-full">
+        QR-Code scannen & Punkte holen
+      </button>
+
+      <button id="repeatScan" class="mt-2 px-4 py-2 bg-orange-600 text-white rounded w-full hidden">
+        Scan wiederholen
+      </button>
 
       <div id="cupCount" class="mt-2 text-gray-600">Gesammelte Becher: 0</div>
       <div id="lastPoints" class="mt-2 text-gray-600">Zuletzt erhalten: 0 Punkte</div>
@@ -63,45 +80,62 @@
     <div class="bg-white p-6 rounded-2xl shadow">
       <h3 class="text-xl font-bold">Profil</h3>
       <div class="flex items-center gap-4 mt-4">
-        <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold" id="avatar">U</div>
+        <div id="avatar" class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold">U</div>
         <div>
           <div id="profileName" class="font-semibold text-lg">User</div>
-          <div class="text-sm text-gray-600">Level: <span id="profileLevel">Standard</span></div>
+          <div class="text-sm text-gray-600">
+            Level: <span id="profileLevel">Standard</span>
+          </div>
         </div>
       </div>
+
       <div id="plusInfo" class="mt-4 hidden bg-green-50 border border-green-200 p-3 rounded">
         <p class="text-sm">Elepfand+ aktiv – 10% Bonuspunkte</p>
       </div>
     </div>
+
   </div>
 
+  <!-- Rewards -->
   <section class="mt-10">
     <h3 class="text-2xl font-bold">Rewards Shop</h3>
+
     <div class="grid md:grid-cols-3 gap-6 mt-6">
+
       <div class="bg-white p-4 rounded-xl shadow">
         <h4 class="font-semibold">Gratis Getränk</h4>
         <p class="text-sm text-gray-600">50 Punkte</p>
         <button data-cost="50" class="buyBtn mt-3 px-4 py-2 bg-blue-600 text-white rounded w-full">Einlösen</button>
       </div>
+
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h4 class="font-semibold">Gratis Cookie 🍪</h4>
+        <p class="text-sm text-gray-600">300 Punkte – nur teilnehmende Filialen</p>
+        <button data-cost="300" data-reward="cookie" class="buyBtn mt-3 px-4 py-2 bg-blue-600 text-white rounded w-full">Einlösen</button>
+      </div>
+
       <div class="bg-white p-4 rounded-xl shadow">
         <h4 class="font-semibold">Thermobecher</h4>
         <p class="text-sm text-gray-600">700 Punkte</p>
         <button data-cost="700" class="buyBtn mt-3 px-4 py-2 bg-blue-600 text-white rounded w-full">Einlösen</button>
       </div>
-      <div class="bg-white p-4 rounded-xl shadow">
-        <h4 class="font-semibold">Elepfand+</h4>
-        <p class="text-sm text-gray-600">2500 Punkte</p>
-        <button data-cost="2500" class="buyBtn mt-3 px-4 py-2 bg-blue-600 text-white rounded w-full">Einlösen</button>
-      </div>
+
     </div>
   </section>
+
+  <!-- Map -->
+  <section class="mt-14">
+    <h3 class="text-2xl font-bold text-center">Alle teilnehmenden Filialen</h3>
+    <p class="text-center text-gray-600 mt-2">Münster</p>
+    <div id="map" class="mt-6 rounded-2xl shadow" style="height:400px;"></div>
+  </section>
+
 </section>
 
-<section id="qrcode" class="qr-section max-w-7xl mx-auto px-6 py-20 hidden">
+<section id="qrcode" class="max-w-7xl mx-auto px-6 py-20 hidden">
   <h2 class="text-2xl font-bold text-center">QR scannen – Punkte erhalten</h2>
   <p class="text-gray-600 text-center mt-2">Richte deine Kamera auf den QR-Code.</p>
   <div id="qr-reader" style="width:320px; margin:30px auto;"></div>
-  <div id="qr-result" class="text-center font-bold text-lg mt-4"></div>
 </section>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
@@ -118,104 +152,104 @@ let cupCount = 0;
 let qrReaderInstance = null;
 
 function renderUser(){
-  document.getElementById("avatar").textContent = state.name.charAt(0).toUpperCase();
-  document.getElementById("profileName").textContent = state.name;
-  document.getElementById("profileLevel").textContent = state.plus ? "Elepfand+" : "Standard";
-  document.getElementById("pointCount").textContent = state.points;
-  document.getElementById("plusInfo").style.display = state.plus ? "block" : "none";
+  avatar.textContent = state.name.charAt(0).toUpperCase();
+  profileName.textContent = state.name;
+  profileLevel.textContent = state.plus ? "Elepfand+" : "Standard";
+  pointCount.textContent = state.points;
+  plusInfo.style.display = state.plus ? "block" : "none";
 }
 
-// Login
-document.getElementById("loginForm").addEventListener("submit", e=>{
+loginForm.onsubmit = e=>{
   e.preventDefault();
   const name = loginName.value.trim();
   if(!USERS[name]) return alert("Benutzer nicht gefunden!");
   state = {...USERS[name], name};
-  document.getElementById("main").classList.remove("hidden");
+  main.classList.remove("hidden");
   renderUser();
-});
+};
 
-// Becher hinzufügen
-document.getElementById("addCup").onclick = () => {
+addCup.onclick = ()=>{
   cupCount++;
-  document.getElementById("cupCount").textContent = "Gesammelte Becher: " + cupCount;
+  cupCountEl = document.getElementById("cupCount");
+  cupCountEl.textContent = "Gesammelte Becher: " + cupCount;
 };
 
-// QR-Code scannen & Punkte holen
-document.getElementById("scanAll").onclick = () => {
-  if(cupCount === 0) return alert("Keine Becher zum Scannen!");
-  document.getElementById("qrcode").classList.remove("hidden");
-  document.getElementById("qrcode").scrollIntoView({ behavior: "smooth" });
+scanAll.onclick = ()=>{
+  if(cupCount === 0) return alert("Keine Becher!");
+  qrcode.classList.remove("hidden");
+  qrcode.scrollIntoView({behavior:"smooth"});
   startScanner();
-  document.getElementById("repeatScan").classList.remove("hidden");
+  repeatScan.classList.remove("hidden");
 };
 
-// Wiederholungs-Scan
-document.getElementById("repeatScan").onclick = () => {
-  startScanner();
-};
+repeatScan.onclick = ()=>startScanner();
 
-// QR Scanner Funktion
-function startScanner() {
+function startScanner(){
   if(qrReaderInstance) qrReaderInstance.stop().catch(()=>{});
   qrReaderInstance = new Html5Qrcode("qr-reader");
-  const config = { fps: 10, qrbox: 250 };
 
   qrReaderInstance.start(
-    { facingMode: "environment" },
-    config,
-    qrMsg => {
-      if(qrMsg.toLowerCase().includes("qr.link/2w98nl")){
-        let pts = 5 * cupCount;
+    {facingMode:"environment"},
+    {fps:10, qrbox:250},
+    msg=>{
+      if(msg.toLowerCase().includes("qr.link/2w98nl")){
+        let pts = cupCount * 5;
         if(state.plus) pts = Math.floor(pts * 1.1);
         state.points += pts;
-        renderUser();
-        document.getElementById("lastPoints").textContent = `Zuletzt erhalten: ${pts} Punkte`;
-
-        // Punkte Flash
-        const pointBox = document.getElementById("pointCount");
-        pointBox.classList.add("points-flash");
-        setTimeout(()=>pointBox.classList.remove("points-flash"),500);
-
-        confettiBlast();
+        lastPoints.textContent = "Zuletzt erhalten: " + pts + " Punkte";
         cupCount = 0;
         document.getElementById("cupCount").textContent = "Gesammelte Becher: 0";
+        pointCount.classList.add("points-flash");
+        setTimeout(()=>pointCount.classList.remove("points-flash"),500);
+        confettiBlast();
+        renderUser();
         qrReaderInstance.stop();
       }
-    },
-    ()=>{}
+    }
   );
 }
 
-// Confetti Effekt
 function confettiBlast(){
   for(let i=0;i<100;i++){
-    const confetti = document.createElement("div");
-    confetti.className="confetti";
-    confetti.style.left=Math.random()*window.innerWidth+"px";
-    confetti.style.top="-10px";
-    confetti.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(confetti);
-    let fallDuration = 1000 + Math.random()*1000;
-    confetti.animate([{transform:"translateY(0) rotate(0deg)"},{transform:`translateY(${window.innerHeight}px) rotate(${Math.random()*720}deg)`}],{duration:fallDuration, easing:"linear"});
-    setTimeout(()=>confetti.remove(),fallDuration);
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*innerWidth+"px";
+    c.style.top="-10px";
+    c.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    let d=1000+Math.random()*1000;
+    c.animate([{transform:"translateY(0)"},{transform:`translateY(${innerHeight}px)`}],{duration:d});
+    setTimeout(()=>c.remove(),d);
   }
 }
 
-// Rewards Shop
-document.querySelectorAll('.buyBtn').forEach(btn=>{
-  btn.onclick = ()=>{
-    const cost = parseInt(btn.dataset.cost);
-    if(state.points >= cost){
-      state.points -= cost;
-      renderUser();
-      alert("Belohnung eingelöst!");
-    } else alert("Nicht genug Punkte.");
+document.querySelectorAll(".buyBtn").forEach(btn=>{
+  btn.onclick=()=>{
+    const cost=+btn.dataset.cost;
+    if(state.points<cost) return alert("Nicht genug Punkte");
+    state.points-=cost;
+    renderUser();
+    alert(btn.dataset.reward==="cookie"
+      ? "🍪 Cookie freigeschaltet – nur teilnehmende Filialen!"
+      : "Belohnung eingelöst!");
   };
 });
+
+// Map
+const map=L.map("map").setView([51.9607,7.6261],13);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+[
+  ["Elepfand Innenstadt",51.962,7.625],
+  ["Elepfand Hafen",51.965,7.609],
+  ["Elepfand Gievenbeck",51.951,7.586]
+].forEach(f=>{
+  L.marker([f[1],f[2]]).addTo(map).bindPopup(f[0]+"<br>🍪 Cookie verfügbar");
+});
 </script>
+
 </body>
 </html>
+
 
 
 
